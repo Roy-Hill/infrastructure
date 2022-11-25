@@ -1,0 +1,187 @@
+---
+version: "3.6"
+services:
+    PrivateBin:
+        container_name: "PrivateBin"
+        image: "privatebin/nginx-fpm-alpine:latest"
+        ports:
+            - "1992:8080/tcp"
+        read_only: true
+        restart: "unless-stopped"
+        volumes:
+            - "/dockerData/privatebin/conf.php:/srv/cfg/conf.php:ro"
+            - "/dockerData/privatebin/privatebin-data:/srv/data"
+    SelfHosted.Show.Discord.RSS.Bot:
+        container_name: "SelfHosted.Show.Discord.RSS.Bot"
+        environment:
+            - "TOKEN=FIXME"
+        image: "brhiggins/discord-rss-fetcher:latest"
+        restart: "unless-stopped"
+        volumes:
+            - "/dockerData/selfhosted-rss-bot:/app/nedb-data"
+    metabase:
+        container_name: "metabase"
+        image: "metabase/metabase:latest"
+        ports:
+            - "1993:3000/tcp"
+        restart: "unless-stopped"
+        volumes:
+            - "/dockerData/metabase:/metabase-data"
+    portainer:
+        container_name: "portainer"
+        image: "portainer/portainer-ce:latest"
+        ports:
+            - "8000:8000/tcp"
+            - "9000:9000/tcp"
+        restart: "always"
+        volumes:
+            - "/var/run/docker.sock:/var/run/docker.sock"
+            - "/dockerData/portainer:/data"
+    qbittorrent-vpn:
+        container_name: "qbittorrent-vpn"
+        environment:
+            - "VPN_ENABLED=yes"
+            - "VPN_TYPE=wireguard"
+            - "LAN_NETWORK=192.168.0.0/24"
+        image: "dyonr/qbittorrentvpn:latest"
+        ports:
+            - "8080:8080/tcp"
+        restart: "unless-stopped"
+        volumes:
+            - "/media/easystore/Torrents:/downloads"
+            - "/dockerData/qbittorrent:/config"
+    shields.io:
+        container_name: "shields.io"
+        environment:
+            - "GH_TOKEN=FIXME"
+        image: "shieldsio/shields:next"
+        ports:
+            - "2001:80/tcp"
+        restart: "unless-stopped"
+    teamspeak:
+        container_name: "teamspeak"
+        environment:
+            - "TS3SERVER_LICENSE=accept"
+        image: "teamspeak:latest"
+        ports:
+            - "10011:10011/tcp"
+            - "30033:30033/tcp"
+            - "9987:9987/udp"
+        restart: "unless-stopped"
+        volumes:
+            - "/dockerData/teamspeak3server:/var/ts3server"
+    vaultwarden:
+        container_name: "vaultwarden"
+        # environment:
+            # - "ADMIN_TOKEN=FIXME"
+        image: "vaultwarden/server:latest"
+        ports:
+            - "3012:3012/tcp"
+            - "1337:80/tcp"
+        restart: "unless-stopped"
+        volumes:
+            - "/dockerData/vaultwarden:/data"
+    watchtower:
+        container_name: "watchtower"
+        image: "containrrr/watchtower:latest"
+        restart: "unless-stopped"
+        volumes:
+            - "/var/run/docker.sock:/var/run/docker.sock"
+    jackett:
+        container_name: "jackett"
+        image: "lscr.io/linuxserver/jackett:latest"
+        ports:
+        - "9117:9117/tcp"
+        restart: "unless-stopped"
+        volumes:
+        - "/dockerData/jackett:/config"
+        - "/dev/null:/downloads"
+    lidarr:
+        container_name: "lidarr"
+        environment:
+        - "PUID=1000"
+        - "PGID=1005"
+        image: "lscr.io/linuxserver/lidarr:latest"
+        ports:
+        - "8686:8686/tcp"
+        restart: "unless-stopped"
+        volumes:
+        - "/media/easystore/Music:/music"
+        - "/media/easystore/Torrents:/downloads"
+        - "/dockerData/lidarr:/config"
+    ombi:
+        container_name: "ombi"
+        image: "lscr.io/linuxserver/ombi:latest"
+        ports:
+        - "3579:3579/tcp"
+        restart: "unless-stopped"
+        volumes:
+        - "/dockerData/ombi:/config"
+    radarr:
+        container_name: "radarr"
+        environment:
+        - "PUID=1000"
+        - "PGID=1005"
+        image: "lscr.io/linuxserver/radarr:latest"
+        ports:
+        - "7878:7878/tcp"
+        restart: "unless-stopped"
+        volumes:
+        - "/dockerData/radarr:/config"
+        - "/media/easystore/Movies:/movies"
+        - "/media/easystore/Torrents:/downloads"
+    readarr:
+        container_name: "readarr"
+        environment:
+        - "PUID=1000"
+        - "PGID=1005"
+        image: "lscr.io/linuxserver/readarr:develop"
+        ports:
+        - "8787:8787/tcp"
+        restart: "unless-stopped"
+        volumes:
+        - "/media/easystore/Books:/books"
+        - "/media/easystore/Torrents:/downloads"
+        - "/dockerData/readarr:/config"
+    requestrr:
+        container_name: "requestrr"
+        image: "lscr.io/linuxserver/requestrr:latest"
+        ports:
+        - "4545:4545/tcp"
+        restart: "unless-stopped"
+        volumes:
+        - "/dockerData/requestrr:/config"
+    sonarr:
+        container_name: "sonarr"
+        environment:
+        - "PUID=1000"
+        - "PGID=1005"
+        image: "lscr.io/linuxserver/sonarr:latest"
+        ports:
+        - "8989:8989/tcp"
+        restart: "unless-stopped"
+        volumes:
+        - "/dockerData/sonarr:/config"
+        - "/media/easystore/TV:/tv"
+        - "/media/easystore/Torrents:/downloads"
+    tautulli:
+        container_name: "tautulli"
+        image: "lscr.io/linuxserver/tautulli:latest"
+        ports:
+        - "8181:8181/tcp"
+        restart: "unless-stopped"
+        volumes:
+        - "/dockerData/tautulli:/config"
+    bazarr:
+        container_name: "bazarr"
+        environment:
+        - "PUID=1000"
+        - "PGID=1005"
+        image: "lscr.io/linuxserver/bazarr:latest"
+        ports:
+        - "6767:6767/tcp"
+        restart: "unless-stopped"
+        volumes:
+        - "/media/easystore/TV:/tv"
+        - "/dockerData/bazarr:/config"
+        - "/media/easystore/Movies:/movies"

@@ -1,0 +1,8 @@
+---
+meta:
+  - README.md
+  - LICENSE.md
+  - .gitignore
+  - .gitattributes
+  - .github/**/*
+  - .vscode/**/*
