@@ -14,7 +14,7 @@ if [ -z "$1" ]; then
 fi
 
 # Do everything in general.sh first
-bash general.sh
+bash general.sh secrets
 
 # Change SSH Port
 sed -i 's/#Port 22/Port 1000/g' /etc/ssh/sshd_config

@@ -6,8 +6,14 @@ if [ "$EUID" -ne 0 ]; then
     exit
 fi
 
+if [ -z "$1" ]; then
+    echo "You need to specify arguments for this script."
+    echo "bash miab.sh secrets # Allow script to run, after you have configured secrets and SSH private key."
+    exit
+fi
+
 # Do everything in general.sh first
-bash general.sh
+bash general.sh secrets
 
 # Change SSH Port
 sed -i 's/#Port 22/Port 22/g' /etc/ssh/sshd_config

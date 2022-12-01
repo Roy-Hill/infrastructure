@@ -6,6 +6,11 @@ if [ "$EUID" -ne 0 ]; then
     exit
 fi
 
+if [ -z "$1" ]; then
+    echo "Please do not run this script directly."
+    exit
+fi
+
 # Update the system
 apt update
 apt upgrade -y
