@@ -50,7 +50,6 @@ php-mysql
 php-readline
 php-xml
 php-zip
-php-apcu-bc
 php-apcu
 php-cli
 php-common
