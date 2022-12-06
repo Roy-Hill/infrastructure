@@ -22,6 +22,10 @@ systemctl restart sshd
 # Symlink Mail Scripts to ~
 ln -s ~/Scripts/Mail/After_MIAB_Upgrade.sh ~/After_MIAB_Upgrade.sh
 ln -s ~/Scripts/Mail/Blacklist.sh ~/Blacklist.sh
+ln -s ~/Scripts/Mail/Backup.sh ~/Backup.sh
+
+# crontab for backups
+(crontab -l ; echo "0 3 * * * /root/Scripts/Mail/Backup.sh") | crontab -
 
 echo "We have gone as far as we can. Please manually install Mail-in-a-box by running:"
 echo "curl -s https://mailinabox.email/setup.sh | sudo -E bash"
