@@ -87,15 +87,14 @@ services:
         restart: "unless-stopped"
         volumes:
             - "/var/run/docker.sock:/var/run/docker.sock"
-    jackett:
-        container_name: "jackett"
-        image: "lscr.io/linuxserver/jackett:latest"
+    prowlarr:
+        container_name: "prowlarr"
+        image: "lscr.io/linuxserver/prowlarr:develop"
         ports:
-        - "9117:9117/tcp"
+        - "9696:9696"
         restart: "unless-stopped"
         volumes:
-        - "/dockerData/jackett:/config"
-        - "/dev/null:/downloads"
+        - "/dockerData/prowlarr:/config"
     lidarr:
         container_name: "lidarr"
         environment:
