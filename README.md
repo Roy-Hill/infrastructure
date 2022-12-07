@@ -12,8 +12,8 @@
 Shell Scripts to Setup my Home Server.
 
 ```bash
-git clone https://github.com/chxseh/infra.git
-cd infra/src
+git clone https://github.com/chxseh/infrastructure.git
+cd infrastructure/src
 bash $device.sh # should be root user when running this
 ```
 
