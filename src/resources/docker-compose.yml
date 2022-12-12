@@ -184,3 +184,11 @@ services:
         - "/media/easystore/TV:/tv"
         - "/dockerData/bazarr:/config"
         - "/media/easystore/Movies:/movies"
+    homepage:
+        image: ghcr.io/benphelps/homepage:latest
+        container_name: homepage
+        ports:
+        - 1994:3000
+        volumes:
+        - /dockerData/homepage:/app/config # Make sure your local config directory exists
+        - /var/run/docker.sock:/var/run/docker.sock # (optional) For docker integrations
