@@ -192,3 +192,4 @@ services:
         volumes:
         - /dockerData/homepage:/app/config # Make sure your local config directory exists
         - /var/run/docker.sock:/var/run/docker.sock # (optional) For docker integrations
+        - /media/easystore:/media/easystore # for storage integration
