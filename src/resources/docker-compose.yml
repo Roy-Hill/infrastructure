@@ -244,3 +244,14 @@ services:
         volumes:
             - "/dockerData/gokapi/data:/app/data"
             - "/dockerData/gokapi/config:/app/config"
+    openbooks:
+        container_name: OpenBooks
+        image: evanbuss/openbooks:latest
+        ports:
+        - "1996:80"
+        restart: unless-stopped
+        volumes:
+        - "/dockerData/openbooks:/books"
+        command: --persist
+        # environment:
+        # - BASE_PATH=/openbooks/
