@@ -255,3 +255,11 @@ services:
         command: --persist
         # environment:
         # - BASE_PATH=/openbooks/
+    phpmyadmin:
+        container_name: phpmyadmin
+        image: phpmyadmin:latest
+        ports:
+        - "1997:80"
+        restart: unless-stopped
+        volumes:
+        - "/dockerData/phpmyadmin/config.inc.php:/etc/phpmyadmin/config.user.inc.php"
