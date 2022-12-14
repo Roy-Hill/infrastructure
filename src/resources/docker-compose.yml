@@ -191,9 +191,9 @@ services:
         - 1994:3000
         restart: "unless-stopped"
         volumes:
-        - /dockerData/homepage:/app/config # Make sure your local config directory exists
-        - /var/run/docker.sock:/var/run/docker.sock # (optional) For docker integrations
-        - /media/easystore:/media/easystore # for storage integration
+        - /dockerData/homepage:/app/config
+        - /var/run/docker.sock:/var/run/docker.sock
+        - /media/easystore:/media/easystore:ro
     scrutiny:
         container_name: scrutiny
         image: ghcr.io/analogj/scrutiny:master-omnibus
