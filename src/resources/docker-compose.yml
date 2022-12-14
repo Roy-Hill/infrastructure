@@ -253,8 +253,6 @@ services:
         volumes:
         - "/dockerData/openbooks:/books"
         command: --persist
-        # environment:
-        # - BASE_PATH=/openbooks/
     phpmyadmin:
         container_name: phpmyadmin
         image: phpmyadmin:latest
