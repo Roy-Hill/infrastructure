@@ -119,6 +119,7 @@ slotmem_shm
 socache_shmcb
 ssl
 xml2enc
+http2
 "
 a2enmod "$(tr '\n' ' ' <<< "$APACHE_MODULES")"
 systemctl restart apache2
