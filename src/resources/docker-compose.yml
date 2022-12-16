@@ -311,3 +311,15 @@ services:
         - /dockerData/tubearchivist/es:/usr/share/elasticsearch/data    # check for permission error when using bind mount, see readme
         expose:
         - "9200"
+    homebox:
+        image: ghcr.io/hay-kot/homebox:latest
+        container_name: homebox
+        restart: unless-stopped
+        environment:
+        - HBOX_LOG_LEVEL=info
+        - HBOX_LOG_FORMAT=text
+        - HBOX_WEB_MAX_UPLOAD_SIZE=10
+        ports:
+        - 1997:7745
+        volumes:
+        - /dockerData/homebox:/data/
