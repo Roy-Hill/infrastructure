@@ -64,7 +64,6 @@ php-dev
 php-gmp
 php-opcache
 php-soap
-php-mysql
 libapache2-mod-php
 snapd
 nodejs
