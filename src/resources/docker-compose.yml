@@ -261,3 +261,18 @@ services:
         restart: unless-stopped
         volumes:
         - "/dockerData/phpmyadmin/config.inc.php:/etc/phpmyadmin/config.user.inc.php"
+    emulatorjs:
+        image: lscr.io/linuxserver/emulatorjs:latest
+        container_name: emulatorjs
+        environment:
+        - PUID=1000
+        - PGID=1005
+        - TZ=America/Chicago
+        - SUBFOLDER=/ #optional
+        volumes:
+        - /dockerData/emulatorjs:/config
+        - /media/easystore/emulatorjs:/data
+        ports:
+        - 2002:3000
+        - 2003:80
+        restart: unless-stopped
