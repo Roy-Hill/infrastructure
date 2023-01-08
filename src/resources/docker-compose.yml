@@ -95,19 +95,19 @@ services:
         restart: "unless-stopped"
         volumes:
         - "/dockerData/prowlarr:/config"
-    lidarr:
-        container_name: "lidarr"
-        environment:
-        - "PUID=1000"
-        - "PGID=1005"
-        image: "lscr.io/linuxserver/lidarr:latest"
-        ports:
-        - "8686:8686/tcp"
-        restart: "unless-stopped"
-        volumes:
-        - "/media/easystore/Music:/music"
-        - "/media/easystore/Torrents:/downloads"
-        - "/dockerData/lidarr:/config"
+    # lidarr:
+    #     container_name: "lidarr"
+    #     environment:
+    #     - "PUID=1000"
+    #     - "PGID=1005"
+    #     image: "lscr.io/linuxserver/lidarr:latest"
+    #     ports:
+    #     - "8686:8686/tcp"
+    #     restart: "unless-stopped"
+    #     volumes:
+    #     - "/media/easystore/Music:/music"
+    #     - "/media/easystore/Torrents:/downloads"
+    #     - "/dockerData/lidarr:/config"
     ombi:
         container_name: "ombi"
         image: "lscr.io/linuxserver/ombi:latest"
@@ -276,3 +276,18 @@ services:
         - 2002:3000
         - 2003:80
         restart: unless-stopped
+    lidarr:
+        container_name: "lidarr-on-steroids"
+        environment:
+        - "PUID=1000"
+        - "PGID=1005"
+        image: "youegraillot/lidarr-on-steroids"
+        ports:
+        - "8686:8686/tcp"
+        - "6595:6595/tcp"
+        restart: "unless-stopped"
+        volumes:
+        - "/dockerData/lidarr-on-steroids/lidarr:/config"
+        - "/dockerData/lidarr-on-steroids/deemix:/config_deemix"
+        - "/media/easystore/Music:/music"
+        - "/media/easystore/Torrents:/downloads"
