@@ -108,14 +108,14 @@ services:
     #     - "/media/easystore/Music:/music"
     #     - "/media/easystore/Torrents:/downloads"
     #     - "/dockerData/lidarr:/config"
-    ombi:
-        container_name: "ombi"
-        image: "lscr.io/linuxserver/ombi:latest"
+    overseerr:
+        container_name: "overseerr"
+        image: "lscr.io/linuxserver/overseerr:latest"
         ports:
-        - "3579:3579/tcp"
+        - "5055:5055"
         restart: "unless-stopped"
         volumes:
-        - "/dockerData/ombi:/config"
+        - "/dockerData/overseerr:/config"
     radarr:
         container_name: "radarr"
         environment:
