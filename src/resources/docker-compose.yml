@@ -291,3 +291,11 @@ services:
         - "/dockerData/lidarr-on-steroids/deemix:/config_deemix"
         - "/media/easystore/Music:/music"
         - "/media/easystore/Torrents:/downloads"
+    freshrss:
+        container_name: "freshrss"
+        image: "lscr.io/linuxserver/freshrss:latest"
+        ports:
+        - "2004:80"
+        restart: "unless-stopped"
+        volumes:
+        - "/dockerData/freshrss:/config"
