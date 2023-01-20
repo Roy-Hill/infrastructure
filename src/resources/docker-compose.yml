@@ -14,7 +14,7 @@ services:
     SelfHosted.Show.Discord.RSS.Bot:
         container_name: "SelfHosted.Show.Discord.RSS.Bot"
         environment:
-            - "TOKEN=FIXME"
+            - "TOKEN=FIXME" #! Change this
         image: "brhiggins/discord-rss-fetcher:latest"
         restart: "unless-stopped"
         volumes:
@@ -53,7 +53,7 @@ services:
     shields.io:
         container_name: "shields.io"
         environment:
-            - "GH_TOKEN=FIXME"
+            - "GH_TOKEN=FIXME" #! Change this
         image: "shieldsio/shields:next"
         ports:
             - "2001:80/tcp"
@@ -72,8 +72,6 @@ services:
             - "/dockerData/teamspeak3server:/var/ts3server"
     vaultwarden:
         container_name: "vaultwarden"
-        # environment:
-            # - "ADMIN_TOKEN=FIXME"
         image: "vaultwarden/server:latest"
         ports:
             - "3012:3012/tcp"
@@ -95,19 +93,6 @@ services:
         restart: "unless-stopped"
         volumes:
         - "/dockerData/prowlarr:/config"
-    # lidarr:
-    #     container_name: "lidarr"
-    #     environment:
-    #     - "PUID=1000"
-    #     - "PGID=1005"
-    #     image: "lscr.io/linuxserver/lidarr:latest"
-    #     ports:
-    #     - "8686:8686/tcp"
-    #     restart: "unless-stopped"
-    #     volumes:
-    #     - "/media/easystore/Music:/music"
-    #     - "/media/easystore/Torrents:/downloads"
-    #     - "/dockerData/lidarr:/config"
     overseerr:
         container_name: "overseerr"
         image: "lscr.io/linuxserver/overseerr:latest"
@@ -192,7 +177,7 @@ services:
         restart: "unless-stopped"
         volumes:
         - /dockerData/homepage:/app/config
-        - /var/run/docker.sock:/var/run/docker.sock
+        - /var/run/docker.sock:/var/run/docker.sock:ro
         - /media/easystore:/media/easystore:ro
     scrutiny:
         container_name: scrutiny
@@ -201,8 +186,7 @@ services:
         - SYS_RAWIO
         - SYS_ADMIN
         ports:
-        - "1995:8080" # webapp
-        # - "8086:8086" # influxDB admin
+        - "1995:8080"
         restart: "unless-stopped"
         volumes:
         - /run/udev:/run/udev:ro
@@ -216,13 +200,6 @@ services:
         image: weejewel/wg-easy
         environment:
         - WG_HOST=real.chse.dev
-        # Optional:
-        # - PASSWORD=foobar123
-        # - WG_PORT=51820
-        # - WG_DEFAULT_ADDRESS=10.8.0.x
-        # - WG_DEFAULT_DNS=1.1.1.1
-        # - WG_MTU=1420
-        # - WG_ALLOWED_IPS=192.168.15.0/24, 10.0.1.0/24
         ports:
         - "51820:51820/udp"
         - "51821:51821/tcp"
@@ -268,7 +245,7 @@ services:
         - PUID=1000
         - PGID=1005
         - TZ=America/Chicago
-        - SUBFOLDER=/ #optional
+        - SUBFOLDER=/
         volumes:
         - /dockerData/emulatorjs:/config
         - /media/easystore/emulatorjs:/data
@@ -307,11 +284,17 @@ services:
         - DB_HOST=bookstack
         - DB_PORT=3306
         - DB_USER=bookstack
-        - DB_PASS=<yourdbpass>
+        - DB_PASS=qwerty #! Change this
         - DB_DATABASE=bookstack
         - APP_DEFAULT_DARK_MODE=true
         volumes:
         - /dockerData/bookstack:/config
         ports:
         - 6875:80
+        restart: unless-stopped
+    cyberchef:
+        image: mpepping/cyberchef:latest
+        container_name: cyberchef
+        ports:
+        - 2005:8000
         restart: unless-stopped
