@@ -298,3 +298,15 @@ services:
         ports:
         - 2005:8000
         restart: unless-stopped
+    pyload-ng:
+        image: lscr.io/linuxserver/pyload-ng:latest
+        container_name: pyload-ng
+        environment:
+        - PUID=1000
+        - PGID=1005
+        volumes:
+        - /dockerData/pyload:/config
+        - /media/easystore/Torrents:/downloads
+        ports:
+        - 2006:8000
+        restart: unless-stopped
