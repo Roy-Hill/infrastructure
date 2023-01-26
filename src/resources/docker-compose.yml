@@ -11,14 +11,6 @@ services:
         volumes:
             - "/dockerData/privatebin/conf.php:/srv/cfg/conf.php:ro"
             - "/dockerData/privatebin/privatebin-data:/srv/data"
-    SelfHosted.Show.Discord.RSS.Bot:
-        container_name: "SelfHosted.Show.Discord.RSS.Bot"
-        environment:
-            - "TOKEN=FIXME" #! Change this
-        image: "brhiggins/discord-rss-fetcher:latest"
-        restart: "unless-stopped"
-        volumes:
-            - "/dockerData/selfhosted-rss-bot:/app/nedb-data"
     metabase:
         container_name: "metabase"
         image: "metabase/metabase:latest"
