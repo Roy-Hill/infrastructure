@@ -350,3 +350,27 @@ services:
             - '/dockerData/grafana:/var/lib/grafana'
         user: "1000:1000"
         image: grafana/grafana
+    ghost:
+        container_name: "ghost"
+        environment:
+        - "database__client=mysql"
+        - "database__connection__host=192.168.86.2"
+        - "database__connection__user=ghostblog"
+        - "database__connection__password=password" #! Change This
+        - "database__connection__database=ghostblog"
+        - "url=https://blog.chse.dev"
+        - "mail__from=Chase <ch@chasehall.net>"
+        - "mail__options__auth__user=ch@chasehall.net"
+        - "mail__options__auth__pass=password" #! Change This
+        - "mail__options__host=mail.chse.dev"
+        - "mail__options__port=587"
+        - "mail__options__secure=false"
+        - "mail__options__service=SMTP"
+        - "mail__transport=SMTP"
+        - "NODE_ENV=production"
+        image: "ghost:latest"
+        ports:
+        - "2368:2368/tcp"
+        restart: "unless-stopped"
+        volumes:
+        - "/dockerData/ghost:/var/lib/ghost/content"
