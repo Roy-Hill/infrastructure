@@ -81,7 +81,7 @@ cp ./resources/secrets/*.txt ~
 (crontab -l ; echo "*/15 * * * * /root/ddns.sh") | crontab -
 (crontab -l ; echo "0 0 * * * certbot renew --dns-cloudflare --dns-cloudflare-credentials /root/CF-certbot.txt") | crontab -
 (crontab -l ; echo "0 1 * * * /root/Scripts/Backup/Backup.sh") | crontab -
-(crontab -l ; echo "0 2 * * * docker image prune -f && docker volume prune -f && docker network prune -f") | crontab -
+(crontab -l ; echo "0 2 * * * docker image prune -a -f && docker volume prune -f && docker network prune -f") | crontab -
 (crontab -l ; echo "0 * * * * curl --silent https://missionpark.net?es=cron&guid=edaiqo-pgoemj-cenpat-cbgkjr-fomgjy > /dev/null 2>&1") | crontab -
 
 # Add www-data crontabs
