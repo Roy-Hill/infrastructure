@@ -156,7 +156,7 @@ npm install -g pm2
 # github-ci-runner
 useradd -m -s /bin/bash -G sudo,wheel -p "$(< /dev/urandom tr -dc _A-Z-a-z-0-9 | head -c"${1:-32}";echo;)" github-ci-runner
 if [ "$2" = "sync" ]; then
-    rsync -azrdu --delete -e 'ssh -p1000 -o StrictHostKeyChecking=no' root@$backupIP:/root/backups/hs/github-ci-runner/ /home/github-ci-runner/
+    rsync -azrdu --delete -e 'ssh -p1000 -o StrictHostKeyChecking=no' root@"$backupIP":/root/backups/hs/github-ci-runner/ /home/github-ci-runner/
 fi
 
 # KVM/Cockpit
