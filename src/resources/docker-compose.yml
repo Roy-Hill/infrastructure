@@ -366,3 +366,13 @@ services:
         restart: "unless-stopped"
         volumes:
         - "/dockerData/ghost:/var/lib/ghost/content"
+    speedtest-tracker:
+        container_name: speedtest-tracker
+        ports:
+            - '2007:80'
+        volumes:
+            - '/dockerData/speedtest-tracker:/config'
+        environment:
+            - "PUID=1000"
+            - "PGID=1000"
+        image: ghcr.io/alexjustesen/speedtest-tracker:latest
