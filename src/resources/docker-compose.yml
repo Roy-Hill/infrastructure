@@ -376,3 +376,14 @@ services:
             - "PUID=1000"
             - "PGID=1000"
         image: ghcr.io/alexjustesen/speedtest-tracker:latest
+    wizarr:
+        container_name: wizarr
+        image: ghcr.io/wizarrrr/wizarr
+        ports:
+        - 5690:5690
+        volumes:
+        - /dockerData/wizarr:/data/database
+        environment:
+        - APP_URL=https://joinplex.chse.dev
+        - DISABLE_BUILTIN_AUTH=false
+        - TZ=America/Chicago
