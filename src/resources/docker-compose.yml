@@ -387,3 +387,25 @@ services:
         - APP_URL=https://joinplex.chse.dev
         - DISABLE_BUILTIN_AUTH=false
         - TZ=America/Chicago
+    healthchecks:
+        image: lscr.io/linuxserver/healthchecks:latest
+        container_name: healthchecks
+        environment:
+        - PUID=1000
+        - PGID=1000
+        - SITE_ROOT=https://hc.chse.dev
+        - SITE_NAME=HealthChecks
+        - DEFAULT_FROM_EMAIL=ch@chasehall.net
+        - EMAIL_HOST=mail.chse.dev
+        - EMAIL_PORT=465
+        - EMAIL_HOST_USER=ch@chasehall.net
+        - EMAIL_HOST_PASSWORD=password #! Change This
+        - EMAIL_USE_TLS=True
+        - SUPERUSER_EMAIL=ch@chasehall.net
+        - SUPERUSER_PASSWORD=password #! Change This
+        - DEBUG=False
+        volumes:
+        - /dockerData/healthchecks:/config
+        ports:
+        - 2008:8000
+        restart: unless-stopped
