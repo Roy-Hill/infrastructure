@@ -409,3 +409,17 @@ services:
         ports:
         - 2008:8000
         restart: unless-stopped
+    ntfy:
+        image: binwiederhier/ntfy
+        container_name: ntfy
+        command:
+        - serve --cache-file /var/cache/ntfy/cache.db
+        environment:
+        - TZ=UTC
+        user: 1000:1000
+        volumes:
+        - /dockerData/ntfy:/var/cache/ntfy
+        - /dockerData/ntfy/server.yml:/etc/ntfy/server.yml
+        ports:
+        - 2009:80
+        restart: unless-stopped
