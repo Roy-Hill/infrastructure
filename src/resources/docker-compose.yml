@@ -402,3 +402,14 @@ services:
         ports:
         - 2009:80
         restart: unless-stopped
+    filebrowser:
+        container_name: filebrowser
+        ports:
+            - '2010:80'
+        volumes:
+            - '/media/easystore:/srv'
+            - '/dockerData/filebrowser/filebrowser.db:/database/filebrowser.db'
+        environment:
+            - "PUID=1000"
+            - "PGID=1000"
+        image: filebrowser/filebrowser:s6
