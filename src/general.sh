@@ -12,8 +12,8 @@ if [ -z "$1" ]; then
 fi
 
 # Update the system
-apt update
-apt upgrade -y
+/usr/bin/apt update
+/usr/bin/apt upgrade -y
 
 # Install base packages
 PACKAGES="
@@ -26,7 +26,7 @@ htop
 vim
 sed
 apt-transport-https
-ca-certificates
+ca-certifi/usr/bin/cat es
 software-properties-common
 fail2ban
 dos2unix
@@ -40,61 +40,61 @@ neofetch
 zsh
 dialog
 "
-apt install -y "$(tr '\n' ' ' <<< "$PACKAGES")"
+/usr/bin/apt install -y "$(tr '\n' ' ' <<< "$PACKAGES")"
 
 # Install my SSH key
-mkdir -p ~/.ssh
-chmod 700 ~/.ssh
-cp ./resources/ssh-keys/* ~/.ssh/
-chmod 600 ~/.ssh/*
-cat ~/.ssh/*.pub >> ~/.ssh/authorized_keys
-chmod 644 ~/.ssh/authorized_keys
+/usr/bin/mkdir -p ~/.ssh
+/usr/bin/chmod 700 ~/.ssh
+/usr/bin/cp ./resources/ssh-keys/* ~/.ssh/
+/usr/bin/chmod 600 ~/.ssh/*
+/usr/bin/cat  ~/.ssh/*.pub >> ~/.ssh/authorized_keys
+/usr/bin/chmod 644 ~/.ssh/authorized_keys
 
 # Lockdown SSH
-sed -i 's/#PasswordAuthentication yes/PasswordAuthentication no/g' /etc/ssh/sshd_config
-sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin prohibit-password/g' /etc/ssh/sshd_config
-sed -i 's/#PermitRootLogin no/PermitRootLogin prohibit-password/g' /etc/ssh/sshd_config
-sed -i 's/#UsePAM yes/UsePAM no/g' /etc/ssh/sshd_config
-systemctl restart sshd
+/usr/bin/sed -i 's/#PasswordAuthentication yes/PasswordAuthentication no/g' /etc/ssh/sshd_config
+/usr/bin/sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin prohibit-password/g' /etc/ssh/sshd_config
+/usr/bin/sed -i 's/#PermitRootLogin no/PermitRootLogin prohibit-password/g' /etc/ssh/sshd_config
+/usr/bin/sed -i 's/#UsePAM yes/UsePAM no/g' /etc/ssh/sshd_config
+/usr/bin/systemctl restart sshd
 
 # Enable passwordless sudo for user
 echo "user ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 
 # Set default shell to zsh
-chsh -s "$(which zsh)"
+/usr/bin/chsh -s "$(which zsh)"
 
 # Disable MOTDs
-touch ~/.hushlogin
+/usr/bin/touch ~/.hushlogin
 
 # Start fail2ban
-systemctl enable --now fail2ban
+/usr/bin/systemctl enable --now fail2ban
 
 # Install oh-my-zsh
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+/usr/bin/sh -c "$(/usr/bin/curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
 
 # Install zsh plugins
 ## zsh-autosuggestions
-git clone https://github.com/zsh-users/zsh-autosuggestions ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions
+/usr/bin/git clone https://github.com/zsh-users/zsh-autosuggestions ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions
 
 # Install my dotfiles
-git clone https://github.com/chxseh/dotfiles.git ~/.dotfiles
-if [ -f ~/.zshrc ]; then mv ~/.zshrc ~/.zshrc.bak; fi
-ln -s ~/.dotfiles/zshrc ~/.zshrc
-if [ -f ~/.vimrc ]; then mv ~/.vimrc ~/.vimrc.bak; fi
-ln -s ~/.dotfiles/vimrc ~/.vimrc
-if [ -f ~/.gitconfig ]; then mv ~/.gitconfig ~/.gitconfig.bak; fi
-ln -s ~/.dotfiles/gitconfig ~/.gitconfig
+/usr/bin/git clone https://github.com/chxseh/dotfiles.git ~/.dotfiles
+if [ -f ~/.zshrc ]; then /usr/bin/mv ~/.zshrc ~/.zshrc.bak; fi
+/usr/bin/ln -s ~/.dotfiles/zshrc ~/.zshrc
+if [ -f ~/.vimrc ]; then /usr/bin/mv ~/.vimrc ~/.vimrc.bak; fi
+/usr/bin/ln -s ~/.dotfiles/vimrc ~/.vimrc
+if [ -f ~/.gitconfig ]; then /usr/bin/mv ~/.gitconfig ~/.gitconfig.bak; fi
+/usr/bin/ln -s ~/.dotfiles/gitconfig ~/.gitconfig
 
 # Install my scripts
-git clone https://github.com/chxseh/Scripts.git ~/Scripts
+/usr/bin/git clone https://github.com/chxseh/Scripts.git ~/Scripts
 
 # Setup MOTD
-cp ./resources/motd.sh /etc/motd.sh
-chmod +x /etc/motd.sh
+/usr/bin/cp ./resources/motd.sh /etc/motd.sh
+/usr/bin/chmod +x /etc/motd.sh
 
 # Setup unattended upgrades
-cp ./resources/unattended-upgrades/* /etc/apt/apt.conf.d/
+/usr/bin/cp ./resources/unattended-upgrades/* /etc/apt/apt.conf.d/
 
 # sysctl tweaks
-cp ./resources/sysctl.conf /etc/sysctl.conf
-sysctl -p
+/usr/bin/cp ./resources/sysctl.conf /etc/sysctl.conf
+/usr/sbin/sysctl -p

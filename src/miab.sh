@@ -13,19 +13,19 @@ if [ -z "$1" ]; then
 fi
 
 # Do everything in general.sh first
-bash general.sh secrets
+/usr/bin/bash general.sh secrets
 
 # Change SSH Port
-sed -i 's/#Port 22/Port 22/g' /etc/ssh/sshd_config
-systemctl restart sshd
+/usr/bin/sed -i 's/#Port 22/Port 22/g' /etc/ssh/sshd_config
+/usr/bin/systemctl restart sshd
 
 # Symlink Mail Scripts to ~
-ln -s ~/Scripts/Mail/After_MIAB_Upgrade.sh ~/After_MIAB_Upgrade.sh
-ln -s ~/Scripts/Mail/Blacklist.sh ~/Blacklist.sh
-ln -s ~/Scripts/Mail/Backup.sh ~/Backup.sh
+/usr/bin/ln -s ~/Scripts/Mail/After_MIAB_Upgrade.sh ~/After_MIAB_Upgrade.sh
+/usr/bin/ln -s ~/Scripts/Mail/Blacklist.sh ~/Blacklist.sh
+/usr/bin/ln -s ~/Scripts/Mail/Backup.sh ~/Backup.sh
 
 # crontab for backups
-(crontab -l ; echo "0 3 * * * /root/Scripts/Mail/Backup.sh") | crontab -
+(/usr/bin/crontab -l ; echo "0 3 * * * /root/Scripts/Mail/Backup.sh") | /usr/bin/crontab -
 
 echo "We have gone as far as we can. Please manually install Mail-in-a-box by running:"
 echo "curl -s https://mailinabox.email/setup.sh | sudo -E bash"

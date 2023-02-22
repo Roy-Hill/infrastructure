@@ -1,5 +1,5 @@
 #!/bin/sh
 
-clear
-neofetch
+/usr/bin/clear
+/usr/bin/neofetch
 echo

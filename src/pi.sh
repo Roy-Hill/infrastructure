@@ -13,16 +13,16 @@ if [ -z "$1" ]; then
 fi
 
 # Do everything in general.sh first
-bash general.sh secrets
+/usr/bin/bash general.sh secrets
 
 # Change SSH Port
-sed -i 's/#Port 22/Port 1010/g' /etc/ssh/sshd_config
-systemctl restart sshd
+/usr/bin/sed -i 's/#Port 22/Port 1010/g' /etc/ssh/sshd_config
+/usr/bin/systemctl restart sshd
 
 # Make backup locations
-mkdir -p ~/backups/{ms,miab}
-mkdir -p ~/backups/ms/www/{var-www,etc-apache2,etc-letsencrypt}
-mkdir -p ~/backups/miab/
-mkdir -p ~/backups/ms/{docker,root-home,github-ci-runner}
+/usr/bin/mkdir -p ~/backups/{ms,miab}
+/usr/bin/mkdir -p ~/backups/ms/www/{var-www,etc-apache2,etc-letsencrypt}
+/usr/bin/mkdir -p ~/backups/miab/
+/usr/bin/mkdir -p ~/backups/ms/{docker,root-home,github-ci-runner}
 
 cd ~ || exit
