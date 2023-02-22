@@ -84,9 +84,6 @@ npm
 (/usr/bin/crontab -l ; echo "0 2 * * * docker image prune -a -f && docker volume prune -f && docker network prune -f") | /usr/bin/crontab -
 (/usr/bin/crontab -l ; echo "0 * * * * curl --silent https://missionpark.net?es=cron&guid=edaiqo-pgoemj-cenpat-cbgkjr-fomgjy > /dev/null 2>&1") | /usr/bin/crontab -
 
-# Add www-data crontabs
-/usr/bin/sudo -u www-data /usr/bin/crontab -l | { /usr/bin/cat; echo "flock /tmp php --define apc.enable_cli=1 -f /var/www/nextcloud/cron.php"; } | /usr/bin/sudo -u www-data /usr/bin/crontab -
-
 # MySQL setup
 ## Set MySQL root password
 /usr/bin/mysqladmin -u root password "$(cat ~/DB_PW.txt)"
