@@ -26,7 +26,7 @@ htop
 vim
 sed
 apt-transport-https
-ca-certifi/usr/bin/cat es
+ca-certificates
 software-properties-common
 fail2ban
 dos2unix
