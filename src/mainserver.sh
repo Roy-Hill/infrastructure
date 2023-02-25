@@ -66,8 +66,6 @@ php-opcache
 php-soap
 libapache2-mod-php
 snapd
-nodejs
-npm
 "
 /usr/bin/apt install -y "$(tr '\n' ' ' <<< "$PACKAGES")"
 
@@ -144,11 +142,6 @@ fi
 cd ./resources || exit
 /usr/bin/docker compose up -d
 cd ../
-
-# npm
-/usr/local/bin/npm install -g n
-n 16
-/usr/local/bin/npm install -g pm2
 
 # github-ci-runner
 /usr/sbin/useradd -m -s /bin/bash -G sudo,wheel -p "$(< /dev/urandom tr -dc _A-Z-a-z-0-9 | /usr/bin/head -c"${1:-32}";echo;)" github-ci-runner

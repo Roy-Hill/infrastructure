@@ -57,9 +57,6 @@ dialog
 /usr/bin/sed -i 's/#UsePAM yes/UsePAM no/g' /etc/ssh/sshd_config
 /usr/bin/systemctl restart sshd
 
-# Enable passwordless sudo for user
-echo "user ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
-
 # Set default shell to zsh
 /usr/bin/chsh -s "$(which zsh)"
 
