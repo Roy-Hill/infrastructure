@@ -413,3 +413,11 @@ services:
             - "PUID=1000"
             - "PGID=1000"
         image: filebrowser/filebrowser:s6
+    plexautolanguages:
+        image: remirigal/plex-auto-languages:latest
+        container_name: PlexAutoLanguages
+        environment:
+        - TZ=America/Chicago
+        volumes:
+        - /dockerData/plexautolanguages:/config
+        restart: unless-stopped
