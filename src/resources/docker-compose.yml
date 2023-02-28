@@ -421,3 +421,10 @@ services:
         volumes:
         - /dockerData/plexautolanguages:/config
         restart: unless-stopped
+    mysql:
+        container_name: mysql
+        ports:
+            - '3306:3306'
+        volumes:
+            - '/dockerData/mysql:/var/lib/mysql'
+        image: mysql

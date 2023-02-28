@@ -39,7 +39,6 @@ echo "deb [signed-by=/usr/share/keyrings/plex.gpg] https://downloads.plex.tv/rep
 # Install main server packages
 PACKAGES="
 apache2
-mysql-server
 php
 php-bcmath
 php-bz2
@@ -82,12 +81,6 @@ snapd
 (/usr/bin/crontab -l ; echo "0 2 * * * docker image prune -a -f && docker volume prune -f && docker network prune -f") | /usr/bin/crontab -
 (/usr/bin/crontab -l ; echo "0 * * * * curl --silent https://missionpark.net?es=cron&guid=edaiqo-pgoemj-cenpat-cbgkjr-fomgjy > /dev/null 2>&1") | /usr/bin/crontab -
 
-# MySQL setup
-## Set MySQL root password
-/usr/bin/mysqladmin -u root password "$(cat ~/DB_PW.txt)"
-## Remove test database
-/usr/bin/mysql -u root -p"$(cat ~/DB_PW.txt)" -e "DROP DATABASE test;"
-
 # Snaps
 /usr/bin/snap refresh
 /usr/bin/snap install certbot --classic
@@ -122,14 +115,10 @@ if [ "$2" = "sync" ]; then
     # Sync data from backup server
     ## WWW Stuff
     backupIP="real.chse.dev"
-    DB_PW=$(cat ~/DB_PW.txt)
     /usr/bin/rsync -azrdu --delete -e 'ssh -p1000 -o StrictHostKeyChecking=no' root@$backupIP:/root/backups/www/var-www/ /var/www/
     /usr/bin/chown -R www-data:www-data /var/www/
     /usr/bin/rsync -azrdu --delete -e 'ssh -p1000 -o StrictHostKeyChecking=no' root@$backupIP:/root/backups/www/etc-apache2/ /etc/apache2/
     /usr/bin/rsync -azrdu --delete -e 'ssh -p1000 -o StrictHostKeyChecking=no' root@$backupIP:/root/backups/www/etc-letsencrypt/ /etc/letsencrypt/
-    /usr/bin/rsync -az -e 'ssh -p1000 -o ScriptHostKeyChecking=no' root@backupIP:/root/backups/www/WWW-SQL-Dump.sql /tmp/WWW-SQL-Dump.sql
-    /usr/bin/mysql -u root -p"$DB_PW" < /tmp/WWW-SQL-Dump.sql
-    /usr/bin/rm /tmp/WWW-SQL-Dump.sql
     /usr/bin/systemctl restart apache2
     ## Home Folder
     /usr/bin/rsync -azrdu --delete -e 'ssh -p1000 -o StrictHostKeyChecking=no' root@$backupIP:/root/backups/hs/root-home/ /root/
