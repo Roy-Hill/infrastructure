@@ -39,6 +39,7 @@ mosh
 neofetch
 zsh
 dialog
+molly-guard
 "
 /usr/bin/apt install -y "$(tr '\n' ' ' <<< "$PACKAGES")"
 
