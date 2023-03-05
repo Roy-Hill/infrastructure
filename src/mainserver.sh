@@ -138,14 +138,6 @@ if [ "$2" = "sync" ]; then
     /usr/bin/rsync -azrdu --delete -e 'ssh -p1000 -o StrictHostKeyChecking=no' root@"$backupIP":/root/backups/hs/github-ci-runner/ /home/github-ci-runner/
 fi
 
-# KVM/Cockpit
-## Install KVM
-/usr/bin/apt install -y qemu-kvm libvirt-daemon-system libvirt-clients virtinst cpu-checker libguestfs-tools libosinfo-bin
-/usr/bin/systemctl enable --now libvirtd
-## Install Cockpit
-/usr/bin/apt install cockpit cockpit-machines -y
-/usr/bin/systemctl enable --now cockpit.socket
-
 echo
 echo "Done!"
 echo "Please go setup Docker container secrets."
