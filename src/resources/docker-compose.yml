@@ -340,6 +340,7 @@ services:
             - "PUID=1000"
             - "PGID=1000"
         image: ghcr.io/alexjustesen/speedtest-tracker:latest
+        restart: unless-stopped
     wizarr:
         container_name: wizarr
         image: ghcr.io/wizarrrr/wizarr
@@ -351,6 +352,7 @@ services:
         - APP_URL=https://joinplex.chse.dev
         - DISABLE_BUILTIN_AUTH=false
         - TZ=America/Chicago
+        restart: unless-stopped
     healthchecks:
         image: lscr.io/linuxserver/healthchecks:latest
         container_name: healthchecks
@@ -398,6 +400,7 @@ services:
             - "PUID=1000"
             - "PGID=1000"
         image: filebrowser/filebrowser:s6
+        restart: unless-stopped
     plexautolanguages:
         image: remirigal/plex-auto-languages:latest
         container_name: PlexAutoLanguages
@@ -413,3 +416,14 @@ services:
         volumes:
             - '/dockerData/mysql:/var/lib/mysql'
         image: mysql
+        restart: unless-stopped
+    umami:
+        container_name: umami
+        ports:
+            - '2011:3000'
+        environment:
+        - DATABASE_TYPE=mysql
+        - DATABASE_URL=mysql://umami:PASSWORDHERE@192.168.86.2:3306/umami #! Change This
+        - HASH_SALT=<random-chars> #! Change This
+        image: ghcr.io/umami-software/umami:mysql-latest
+        restart: unless-stopped
