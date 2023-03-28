@@ -427,3 +427,9 @@ services:
         - HASH_SALT=<random-chars> #! Change This
         image: ghcr.io/umami-software/umami:mysql-latest
         restart: unless-stopped
+    ittools:
+        container_name: it-tools
+        ports:
+            - '2012:80'
+        image: corentinth/it-tools:latest
+        restart: unless-stopped
