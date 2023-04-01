@@ -433,3 +433,19 @@ services:
             - '2012:80'
         image: corentinth/it-tools:latest
         restart: unless-stopped
+    mc:
+        container_name: mc
+        image: itzg/minecraft-server
+        ports:
+        - 25565:25565
+        environment:
+            - MEMORY=2G
+            - USE_AIKAR_FLAGS=true
+            - EULA=TRUE
+            - VERSION=LATEST
+            - TYPE=PURPUR
+        tty: true
+        stdin_open: true
+        restart: unless-stopped
+        volumes:
+        - /dockerData/mc:/data
