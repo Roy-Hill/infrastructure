@@ -34,7 +34,7 @@ services:
         environment:
             - "VPN_ENABLED=yes"
             - "VPN_TYPE=wireguard"
-            - "LAN_NETWORK=192.168.0.0/24"
+            - "LAN_NETWORK=10.0.0.0/24"
         image: "dyonr/qbittorrentvpn:latest"
         ports:
             - "8080:8080/tcp"
@@ -310,7 +310,7 @@ services:
         container_name: "ghost"
         environment:
         - "database__client=mysql"
-        - "database__connection__host=192.168.86.2"
+        - "database__connection__host=10.0.86.2"
         - "database__connection__user=ghostblog"
         - "database__connection__password=password" #! Change This
         - "database__connection__database=ghostblog"
@@ -361,7 +361,7 @@ services:
         - PGID=1000
         - SITE_ROOT=https://hc.chse.dev
         - SITE_NAME=HealthChecks
-        - DEFAULT_FROM_EMAIL=ch@chasehall.net
+        - DEFAULT_FROM_EMAIL=roy@westafricanhills.com
         - EMAIL_HOST=mail.chse.dev
         - EMAIL_PORT=465
         - EMAIL_HOST_USER=ch@chasehall.net
@@ -423,7 +423,7 @@ services:
             - '2011:3000'
         environment:
         - DATABASE_TYPE=mysql
-        - DATABASE_URL=mysql://umami:PASSWORDHERE@192.168.86.2:3306/umami #! Change This
+        - DATABASE_URL=mysql://umami:PASSWORDHERE@10.0.86.2:3306/umami #! Change This
         - HASH_SALT=<random-chars> #! Change This
         image: ghcr.io/umami-software/umami:mysql-latest
         restart: unless-stopped
