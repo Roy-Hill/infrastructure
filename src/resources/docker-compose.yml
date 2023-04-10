@@ -449,3 +449,19 @@ services:
         restart: unless-stopped
         volumes:
         - /dockerData/mc:/data
+    uptime-kuma-ext:
+        container_name: uptime-kuma-ext
+        restart: unless-stopped
+        ports:
+            - '2013:3001'
+        volumes:
+            - '/dockerData/uptime-kuma-ext:/app/data'
+        image: 'louislam/uptime-kuma:1'
+    uptime-kuma-int:
+        container_name: uptime-kuma-int
+        restart: unless-stopped
+        ports:
+            - '2014:3001'
+        volumes:
+            - '/dockerData/uptime-kuma-int:/app/data'
+        image: 'louislam/uptime-kuma:1'
